@@ -6,7 +6,9 @@ int stringToInt(string s);
 string intToString(int i);
 
 int main(int argc, char const *argv[]) {
-  stringToInt("-100009");
+  cout << "String to Int: " << stringToInt("-100009") << endl;
+
+  cout << "Int to String: " << intToString(-6543) << endl;
   return 0;
 }
 
@@ -21,15 +23,12 @@ int stringToInt(string s) {
   }
 
   for (; i < s.size(); i++) {
-    cout << s[i] << ":";
-
     number *= 10;
 
     switch (s[i]) {
       case '0':
         number += 0;
         break;
-
       case '1':
         number += 1;
         break;
@@ -62,60 +61,72 @@ int stringToInt(string s) {
         return 0;
     }
   }
-  cout << "\n";
-
   if (isNegative)
     number *= -1;
 
-  cout << number << endl;
+  // cout << "Int Number: " << number << endl;
   return number;
 }
 
 // Given an Integer i, convert it into String
 string intToString(int i) {
   string s;
-  bool isNegative = false;
+  int isNegative = 0;
+  int digit = 0;
 
-  if (int < 0) {
-    isNegative = true;
+  if (i < 0) {
+    isNegative = 1;
     i *= -1;
+    s = '-';
   }
 
-  switch (i) {
-    case 0:
-      s += '0';
-      break;
-    case 1:
-      s += '1';
-      break;
-    case 2:
-      s += '2';
-      break;
-    case 3:
-      s += '3';
-      break;
-    case 4:
-      s += '4';
-      break;
-    case 5:
-      s += '5';
-      break;
-    case 6:
-      s += '6';
-      break;
-    case 7:
-      s += '7';
-      break;
-    case 8:
-      s += '8';
-      break;
-    case 9:
-      s += '9';
-      break;
+  while (i > 0) {
+    // Get last digit of number
+    digit = i - ((i / 10) * 10);
+    i /= 10;
+    switch (digit) {
+      case 0:
+        s += '0';
+        break;
+      case 1:
+        s += '1';
+        break;
+      case 2:
+        s += '2';
+        break;
+      case 3:
+        s += '3';
+        break;
+      case 4:
+        s += '4';
+        break;
+      case 5:
+        s += '5';
+        break;
+      case 6:
+        s += '6';
+        break;
+      case 7:
+        s += '7';
+        break;
+      case 8:
+        s += '8';
+        break;
+      case 9:
+        s += '9';
+        break;
 
-    default:
-      break;
+      default:
+        break;
+    }
   }
 
+  // reverse the string s
+  int n = s.length();
+  for (int j = isNegative; j < ((n / 2) + isNegative); j++) {
+    swap(s[j], s[n - j - (int)!(isNegative)]);
+  }
+
+  // cout << "String Number: " << s << endl;
   return s;
 }
